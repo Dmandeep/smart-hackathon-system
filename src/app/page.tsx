@@ -4,13 +4,14 @@ import { motion } from "framer-motion";
 import { ArrowRight, Code2, ShieldCheck, Users, Activity, Zap, TerminalSquare, GitBranch, MessageSquare, Award, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { HeroBackground } from "@/components/hero-background";
 
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col relative z-0 overflow-hidden bg-background">
       
-      {/* Cinematic Glowing Orb in Center */}
-      <div className="absolute top-[20%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100vw] md:w-[60vw] h-[100vw] md:h-[60vw] rounded-full bg-primary/20 blur-[120px] pointer-events-none -z-10 animate-pulse mix-blend-multiply dark:mix-blend-screen" style={{ animationDuration: '8s' }} />
+      {/* Premium Landing Page Animation */}
+      <HeroBackground />
 
       {/* Navigation */}
       <nav className="flex items-center justify-between px-6 md:px-12 py-6 sticky top-0 w-full z-50 bg-background/70 backdrop-blur-2xl border-b border-border/50">
