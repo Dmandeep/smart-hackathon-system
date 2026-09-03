@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { Code2, MapPin, Calendar, Users, Search } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const MOCK_HACKATHONS = [
   {
