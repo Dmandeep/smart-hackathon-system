@@ -119,8 +119,37 @@ const MOCK_HACKATHONS = [
 export default function ExplorePage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeState, setActiveState] = useState("All");
+  const [hackathons, setHackathons] = useState(MOCK_HACKATHONS);
+  const [isSyncing, setIsSyncing] = useState(true);
+  const [justSynced, setJustSynced] = useState(false);
 
-  const filteredHackathons = MOCK_HACKATHONS.filter((h) => {
+  // Simulate Automated Real-Time Syncing from Global Database
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const newLiveHackathon = {
+        id: "live-ai-sync-2027",
+        name: "Global Web3 Sync Hack",
+        organizer: "Automated Feed",
+        location: "Virtual (Global)",
+        state: "National",
+        date: "Just Announced",
+        prize: "₹10,00,000",
+        tags: ["DeFi", "AI Agents", "Solana"],
+        image: "bg-gradient-to-br from-fuchsia-600 to-purple-900",
+        participants: 50,
+      };
+      
+      setHackathons(prev => [newLiveHackathon, ...prev]);
+      setIsSyncing(false);
+      setJustSynced(true);
+      
+      setTimeout(() => setJustSynced(false), 5000);
+    }, 4500); // Trigger after 4.5 seconds
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  const filteredHackathons = hackathons.filter((h) => {
     const matchesSearch = h.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
                           h.organizer.toLowerCase().includes(searchQuery.toLowerCase()) ||
                           h.tags.join("").toLowerCase().includes(searchQuery.toLowerCase());
@@ -154,7 +183,31 @@ export default function ExplorePage() {
       <main className="max-w-7xl mx-auto px-6 pt-16">
         
         {/* Header Section */}
-        <div className="mb-16">
+        <div className="mb-16 relative">
+          
+          {/* Live Sync Indicator */}
+          <div className="absolute top-0 right-0 hidden md:flex items-center gap-2 px-4 py-2 bg-card border border-border/50 rounded-full shadow-sm">
+            {isSyncing ? (
+              <>
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                </span>
+                <span className="text-xs font-bold text-foreground/60 tracking-wider uppercase">Auto-Syncing Feeds...</span>
+              </>
+            ) : justSynced ? (
+              <>
+                <span className="w-2 h-2 rounded-full bg-semantic-success"></span>
+                <span className="text-xs font-bold text-semantic-success tracking-wider uppercase">Database Updated</span>
+              </>
+            ) : (
+              <>
+                <span className="w-2 h-2 rounded-full bg-foreground/20"></span>
+                <span className="text-xs font-bold text-foreground/40 tracking-wider uppercase">Up to date</span>
+              </>
+            )}
+          </div>
+
           <h1 className="text-5xl md:text-7xl font-bold font-heading tracking-tighter mb-6 text-foreground">
             Find your next <br /> <span className="text-primary">breakthrough.</span>
           </h1>
