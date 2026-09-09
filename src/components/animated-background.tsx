@@ -10,85 +10,66 @@ export function AnimatedBackground() {
     setIsMounted(true);
   }, []);
 
+  if (!isMounted) return null;
+
   return (
-    <div className="fixed inset-0 pointer-events-none -z-40 overflow-hidden bg-transparent">
-      {/* Dynamic Theme-Aware Grid */}
-      <div 
-        className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05]"
-        style={{
-          backgroundImage: `linear-gradient(to right, var(--foreground) 1px, transparent 1px), linear-gradient(to bottom, var(--foreground) 1px, transparent 1px)`,
-          backgroundSize: '40px 40px',
-          maskImage: 'radial-gradient(ellipse 80% 80% at 50% 50%, #000 40%, transparent 100%)',
-          WebkitMaskImage: 'radial-gradient(ellipse 80% 80% at 50% 50%, #000 40%, transparent 100%)',
-        }}
-      />
+    <div className="fixed inset-0 pointer-events-none -z-40 overflow-hidden bg-background transition-colors duration-700">
       
-      {/* Ambient Moving Geometry */}
-      <motion.div 
-        className="absolute inset-0 opacity-[0.03] dark:opacity-[0.04]"
-        style={{
-          backgroundImage: `linear-gradient(to right, var(--foreground) 1px, transparent 1px), linear-gradient(to bottom, var(--foreground) 1px, transparent 1px)`,
-          backgroundSize: '40px 40px',
-        }}
+      {/* Calm Ambient Orb 1 - Top Left */}
+      <motion.div
+        className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full blur-[100px] md:blur-[150px] opacity-60 dark:opacity-20 mix-blend-normal dark:mix-blend-screen bg-blue-100 dark:bg-blue-900"
         animate={{
-          y: [0, 40],
+          x: [0, 50, 0],
+          y: [0, 50, 0],
+          scale: [1, 1.1, 1],
         }}
         transition={{
+          duration: 25,
           repeat: Infinity,
-          duration: 3,
-          ease: "linear"
+          ease: "easeInOut",
         }}
       />
 
-      {/* Floating Network Nodes (Theme-Aware Color) */}
-      {isMounted && [...Array(12)].map((_, i) => (
-        <motion.div
-          key={`node-${i}`}
-          className="absolute w-1 h-1 bg-foreground/30 dark:bg-primary/40 rounded-full"
-          initial={{
-            x: Math.random() * window.innerWidth,
-            y: Math.random() * window.innerHeight,
-          }}
-          animate={{
-            y: [null, Math.random() * -500],
-            opacity: [0, 1, 0],
-            scale: [1, 1.5, 1],
-          }}
-          transition={{
-            duration: Math.random() * 8 + 6,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: Math.random() * 5,
-          }}
-        />
-      ))}
+      {/* Calm Ambient Orb 2 - Bottom Right */}
+      <motion.div
+        className="absolute bottom-[-10%] right-[-10%] w-[60vw] h-[60vw] rounded-full blur-[100px] md:blur-[150px] opacity-50 dark:opacity-20 mix-blend-normal dark:mix-blend-screen bg-teal-50 dark:bg-teal-900"
+        animate={{
+          x: [0, -70, 0],
+          y: [0, -50, 0],
+          scale: [1, 1.2, 1],
+        }}
+        transition={{
+          duration: 30,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 2,
+        }}
+      />
 
-      {/* Large Slow Drifting Rings */}
-      {isMounted && [...Array(3)].map((_, i) => (
-        <motion.div
-          key={`ring-${i}`}
-          className="absolute rounded-full border border-foreground/5"
-          style={{
-            width: Math.random() * 300 + 200,
-            height: Math.random() * 300 + 200,
-          }}
-          initial={{
-            x: Math.random() * window.innerWidth,
-            y: Math.random() * window.innerHeight,
-            rotate: 0,
-          }}
-          animate={{
-            y: [null, Math.random() * -200 - 100],
-            x: [null, Math.random() * 200 - 100],
-            rotate: 360,
-          }}
-          transition={{
-            duration: Math.random() * 30 + 30,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-        />
-      ))}
+      {/* Calm Ambient Orb 3 - Center Flow */}
+      <motion.div
+        className="absolute top-[20%] left-[20%] w-[70vw] h-[40vw] rounded-full blur-[120px] md:blur-[180px] opacity-40 dark:opacity-10 mix-blend-normal dark:mix-blend-screen bg-purple-100 dark:bg-purple-900"
+        animate={{
+          x: [0, 100, 0],
+          y: [0, -100, 0],
+          rotate: [0, 10, 0],
+        }}
+        transition={{
+          duration: 35,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 5,
+        }}
+      />
+
+      {/* Faint, elegant texture overlay to prevent banding and add premium feel */}
+      <div 
+        className="absolute inset-0 opacity-[0.015] dark:opacity-[0.03] mix-blend-overlay"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+          backgroundRepeat: 'repeat',
+        }}
+      />
     </div>
   );
 }
