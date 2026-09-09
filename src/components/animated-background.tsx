@@ -37,7 +37,7 @@ export function AnimatedBackground() {
 
       {/* Calm Ambient Orb 1 - Top Left */}
       <motion.div
-        className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full blur-[80px] md:blur-[120px] opacity-80 dark:opacity-40 mix-blend-normal dark:mix-blend-screen bg-blue-200 dark:bg-blue-800"
+        className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full blur-[80px] md:blur-[120px] opacity-70 dark:opacity-40 mix-blend-normal dark:mix-blend-screen bg-indigo-300 dark:bg-blue-800"
         animate={{
           x: [0, 50, 0],
           y: [0, 50, 0],
@@ -52,7 +52,7 @@ export function AnimatedBackground() {
 
       {/* Calm Ambient Orb 2 - Bottom Right */}
       <motion.div
-        className="absolute bottom-[-10%] right-[-10%] w-[60vw] h-[60vw] rounded-full blur-[80px] md:blur-[120px] opacity-70 dark:opacity-40 mix-blend-normal dark:mix-blend-screen bg-teal-200 dark:bg-teal-800"
+        className="absolute bottom-[-10%] right-[-10%] w-[60vw] h-[60vw] rounded-full blur-[80px] md:blur-[120px] opacity-60 dark:opacity-40 mix-blend-normal dark:mix-blend-screen bg-emerald-300 dark:bg-teal-800"
         animate={{
           x: [0, -70, 0],
           y: [0, -50, 0],
@@ -68,7 +68,7 @@ export function AnimatedBackground() {
 
       {/* Calm Ambient Orb 3 - Center Flow */}
       <motion.div
-        className="absolute top-[20%] left-[20%] w-[70vw] h-[40vw] rounded-full blur-[100px] md:blur-[150px] opacity-60 dark:opacity-30 mix-blend-normal dark:mix-blend-screen bg-purple-200 dark:bg-purple-800"
+        className="absolute top-[20%] left-[20%] w-[70vw] h-[40vw] rounded-full blur-[100px] md:blur-[150px] opacity-50 dark:opacity-30 mix-blend-normal dark:mix-blend-screen bg-fuchsia-300 dark:bg-purple-800"
         animate={{
           x: [0, 100, 0],
           y: [0, -100, 0],
