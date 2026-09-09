@@ -69,30 +69,7 @@ export function HeroBackground() {
         </motion.div>
       ))}
 
-      {/* Shooting Data Streams (Lasers) */}
-      {[...Array(3)].map((_, i) => (
-        <motion.div
-          key={`laser-${i}`}
-          className="absolute h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent w-[300px]"
-          initial={{
-            x: -300,
-            y: Math.random() * (window.innerHeight * 0.6) + 100,
-            opacity: 0,
-            rotate: 15,
-          }}
-          animate={{
-            x: window.innerWidth + 300,
-            y: (Math.random() * (window.innerHeight * 0.6) + 100) - 200,
-            opacity: [0, 1, 1, 0],
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            repeatDelay: Math.random() * 5 + 2,
-            ease: "easeInOut",
-          }}
-        />
-      ))}
+      {/* Shooting Data Streams removed per user request */}
 
       {/* Grid Floor */}
       <div 

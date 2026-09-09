@@ -3,75 +3,67 @@ import { Badge } from "@/components/ui/badge";
 import { Code2, Search } from "lucide-react";
 
 export default function ParticipantsPage() {
-  const participants = [
-    { id: 1, name: "Alice Chen", role: "Frontend", team: "AutoAgent Dev", status: "Matched" },
-    { id: 2, name: "Bob Smith", role: "Backend", team: "The Mavericks", status: "Matched" },
-    { id: 3, name: "Charlie Davis", role: "AI/ML", team: "Unassigned", status: "Looking for Team" },
-    { id: 4, name: "Diana Prince", role: "Fullstack", team: "Web3 Builders", status: "Matched" },
-    { id: 5, name: "Ethan Hunt", role: "Design", team: "Unassigned", status: "Looking for Team" },
-  ];
-
   return (
-    <div className="max-w-6xl mx-auto space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight mb-1">Participants</h1>
-          <p className="text-foreground/60">Manage registered developers across all your events.</p>
+    <PageTransition>
+      <div className="max-w-7xl mx-auto space-y-10">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h1 className="text-4xl font-bold font-heading mb-2">Participants</h1>
+            <p className="text-foreground/60 text-sm">Review applications, approve hackers, and form AI teams.</p>
+          </div>
+          <div className="flex items-center gap-3">
+            <button className="h-10 px-4 rounded-xl bg-primary text-primary-foreground text-sm font-bold shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-transform">
+              Run AI Matchmaking
+            </button>
+          </div>
         </div>
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-          <input 
-            type="text" 
-            placeholder="Search hackers..." 
-            className="h-10 pl-9 pr-4 bg-background border border-border rounded-lg text-sm focus:outline-none focus:border-primary w-full sm:w-64"
-          />
-        </div>
-      </div>
-      
-      <div className="border border-border/30 bg-background/20 backdrop-blur-xl shadow-2xl rounded-xl overflow-hidden">
-        <Table>
-          <TableHeader className="bg-muted/50">
-            <TableRow>
-              <TableHead>Hacker</TableHead>
-              <TableHead>Primary Role</TableHead>
-              <TableHead>Team Status</TableHead>
-              <TableHead className="text-right">Actions</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {participants.map((p) => (
-              <TableRow key={p.id}>
-                <TableCell className="font-medium flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-xs">
-                    {p.name.charAt(0)}
-                  </div>
-                  {p.name}
-                </TableCell>
-                <TableCell>
-                  <Badge variant="outline" className="font-normal bg-background">
-                    {p.role}
-                  </Badge>
-                </TableCell>
-                <TableCell>
-                  {p.status === "Matched" ? (
-                    <div className="flex items-center gap-2 text-sm">
-                      <Code2 className="w-4 h-4 text-emerald-500" />
-                      {p.team}
-                    </div>
-                  ) : (
-                    <Badge variant="secondary" className="text-blue-500 bg-blue-500/10 hover:bg-blue-500/20">
-                      {p.status}
-                    </Badge>
-                  )}
-                </TableCell>
-                <TableCell className="text-right">
-                  <button className="text-sm text-primary font-medium hover:underline">View Profile</button>
-                </TableCell>
-              </TableRow>
+
+        <div className="border border-border/50 bg-card rounded-3xl shadow-xl overflow-hidden">
+          <div className="p-4 border-b border-border/50 bg-muted/50 flex gap-2 overflow-x-auto">
+            {["Pending Approvals", "Approved", "Waitlisted", "Rejected"].map((tab, i) => (
+              <button key={tab} className={`px-4 py-2 text-sm font-semibold rounded-lg whitespace-nowrap transition-colors ${i === 0 ? 'bg-background shadow-sm text-foreground' : 'text-foreground/50 hover:text-foreground hover:bg-background/50'}`}>
+                {tab}
+              </button>
             ))}
-          </TableBody>
-        </Table>
+          </div>
+          <div className="overflow-x-auto">
+            <Table>
+              <TableHeader>
+                <TableRow className="border-border/50 hover:bg-transparent">
+                  <TableHead className="font-semibold text-xs uppercase tracking-wider text-foreground/50 py-4">Hacker Name</TableHead>
+                  <TableHead className="font-semibold text-xs uppercase tracking-wider text-foreground/50 py-4">University</TableHead>
+                  <TableHead className="font-semibold text-xs uppercase tracking-wider text-foreground/50 py-4">Skills</TableHead>
+                  <TableHead className="font-semibold text-xs uppercase tracking-wider text-foreground/50 py-4">Status</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {[
+                  { name: "Aditi Sharma", uni: "IIT Bombay", skills: ["React", "Python", "AI"], status: "Pending" },
+                  { name: "Rahul Verma", uni: "NIT Surathkal", skills: ["Rust", "Solana", "Web3"], status: "Pending" },
+                  { name: "Priya Patel", uni: "VIT Vellore", skills: ["Figma", "UI/UX", "Frontend"], status: "Pending" },
+                ].map((h, i) => (
+                  <TableRow key={i} className="border-border/50 hover:bg-muted/50 transition-colors">
+                    <TableCell className="font-semibold py-4 whitespace-nowrap">{h.name}</TableCell>
+                    <TableCell className="text-sm text-foreground/80 py-4 whitespace-nowrap">{h.uni}</TableCell>
+                    <TableCell className="py-4 whitespace-nowrap">
+                      <div className="flex gap-2">
+                        {h.skills.map(s => (
+                          <Badge key={s} variant="secondary" className="bg-muted text-[10px] font-semibold">{s}</Badge>
+                        ))}
+                      </div>
+                    </TableCell>
+                    <TableCell className="py-4 whitespace-nowrap">
+                      <Badge variant="outline" className="font-semibold text-[10px] uppercase tracking-wider rounded-full px-3 py-1 border-yellow-500/30 text-yellow-500 bg-yellow-500/10">
+                        {h.status}
+                      </Badge>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+        </div>
       </div>
-    </div>
+    </PageTransition>
   );
 }
