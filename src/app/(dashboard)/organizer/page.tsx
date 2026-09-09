@@ -6,16 +6,16 @@ export default async function OrganizerOverview() {
   const userName = session?.user?.name || "Organizer";
 
   return (
-    <div className="max-w-7xl mx-auto space-y-12">
+    <div className="max-w-7xl mx-auto space-y-8 md:space-y-12">
       
       {/* Welcome Banner */}
-      <div className="relative rounded-3xl overflow-hidden bg-card border border-border/50 p-10 md:p-14 shadow-xl">
-        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-primary/20 blur-[100px] rounded-full pointer-events-none" />
+      <div className="relative rounded-3xl overflow-hidden bg-card border border-border/50 p-6 md:p-14 shadow-xl">
+        <div className="absolute top-0 right-0 w-[200px] md:w-[400px] h-[200px] md:h-[400px] bg-primary/20 blur-[60px] md:blur-[100px] rounded-full pointer-events-none" />
         <div className="relative z-10">
-          <h1 className="text-4xl md:text-5xl font-black font-heading tracking-tight mb-4 text-foreground">
+          <h1 className="text-3xl md:text-5xl font-black font-heading tracking-tight mb-4 text-foreground leading-tight">
             Welcome back, {userName}.
           </h1>
-          <p className="text-lg text-foreground/60 max-w-2xl leading-relaxed">
+          <p className="text-base md:text-lg text-foreground/60 max-w-2xl leading-relaxed">
             Your command center for running the perfect hackathon. Monitor live telemetry, 
             approve hackers, and review AST plagiarism flags instantly.
           </p>

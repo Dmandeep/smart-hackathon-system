@@ -20,35 +20,37 @@ export default async function HackathonsPage() {
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
         
         {/* Events Table - Cinematic Minimal */}
-        <div className="xl:col-span-2 border border-white/5 bg-card/50 backdrop-blur-sm rounded-3xl shadow-xl overflow-hidden self-start">
-          <Table>
-            <TableHeader className="bg-black/40">
-              <TableRow className="border-white/5 hover:bg-transparent">
-                <TableHead className="font-semibold text-xs uppercase tracking-wider text-foreground/50 py-4">Event Name</TableHead>
-                <TableHead className="font-semibold text-xs uppercase tracking-wider text-foreground/50 py-4">Status</TableHead>
-                <TableHead className="font-semibold text-xs uppercase tracking-wider text-foreground/50 py-4">Hackers</TableHead>
-                <TableHead className="font-semibold text-xs uppercase tracking-wider text-foreground/50 py-4">Start Date</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {dbHackathons.map((h) => (
-                <TableRow key={h.id} className="border-white/5 hover:bg-white/5 transition-colors">
-                  <TableCell className="font-semibold py-4">{h.name}</TableCell>
-                  <TableCell className="py-4">
-                    <Badge variant="outline" className={`font-semibold text-[10px] uppercase tracking-wider rounded-full px-3 py-1 ${h.status === 'judging' ? 'border-semantic-alert text-semantic-alert bg-semantic-alert/10' : 'border-primary/30 text-primary bg-primary/10'}`}>
-                      {h.status}
-                    </Badge>
-                  </TableCell>
-                  <TableCell className="text-sm text-foreground/60 py-4">--</TableCell>
-                  <TableCell className="text-sm text-foreground/60 py-4">{new Date(h.startDate).toLocaleDateString()}</TableCell>
+        <div className="xl:col-span-2 border border-border/50 bg-card rounded-3xl shadow-xl overflow-hidden self-start">
+          <div className="overflow-x-auto">
+            <Table>
+              <TableHeader className="bg-muted/50">
+                <TableRow className="border-border/50 hover:bg-transparent">
+                  <TableHead className="font-semibold text-xs uppercase tracking-wider text-foreground/50 py-4">Event Name</TableHead>
+                  <TableHead className="font-semibold text-xs uppercase tracking-wider text-foreground/50 py-4">Status</TableHead>
+                  <TableHead className="font-semibold text-xs uppercase tracking-wider text-foreground/50 py-4">Hackers</TableHead>
+                  <TableHead className="font-semibold text-xs uppercase tracking-wider text-foreground/50 py-4">Start Date</TableHead>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+              </TableHeader>
+              <TableBody>
+                {dbHackathons.map((h) => (
+                  <TableRow key={h.id} className="border-border/50 hover:bg-muted/50 transition-colors">
+                    <TableCell className="font-semibold py-4 whitespace-nowrap">{h.name}</TableCell>
+                    <TableCell className="py-4 whitespace-nowrap">
+                      <Badge variant="outline" className={`font-semibold text-[10px] uppercase tracking-wider rounded-full px-3 py-1 ${h.status === 'judging' ? 'border-semantic-alert text-semantic-alert bg-semantic-alert/10' : 'border-primary/30 text-primary bg-primary/10'}`}>
+                        {h.status}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="text-sm text-foreground/60 py-4 whitespace-nowrap">--</TableCell>
+                    <TableCell className="text-sm text-foreground/60 py-4 whitespace-nowrap">{new Date(h.startDate).toLocaleDateString()}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
         </div>
 
         {/* Create Hackathon Form */}
-        <div className="border border-white/5 bg-card/50 backdrop-blur-sm rounded-3xl shadow-xl p-8 self-start">
+        <div className="border border-border/50 bg-card rounded-3xl shadow-xl p-6 md:p-8 self-start">
           <h2 className="text-2xl font-bold font-heading mb-6">Create Event</h2>
           <form action={createHackathon} className="space-y-5">
             <div className="space-y-2">
@@ -56,7 +58,7 @@ export default async function HackathonsPage() {
               <input 
                 name="name"
                 required
-                className="w-full h-12 px-4 rounded-xl bg-black/50 border border-white/10 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" 
+                className="w-full h-12 px-4 rounded-xl bg-background border border-border/50 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" 
                 placeholder="e.g. Winter Hack 2026" 
               />
             </div>
@@ -65,18 +67,18 @@ export default async function HackathonsPage() {
               <textarea 
                 name="description"
                 required
-                className="w-full h-32 p-4 rounded-xl bg-black/50 border border-white/10 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary resize-none transition-all" 
+                className="w-full h-32 p-4 rounded-xl bg-background border border-border/50 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary resize-none transition-all" 
                 placeholder="What is this hackathon about?" 
               />
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <label className="text-xs font-semibold text-foreground/70 uppercase tracking-wider">Start Date</label>
                 <input 
                   type="date"
                   name="startDate"
                   required
-                  className="w-full h-12 px-4 rounded-xl bg-black/50 border border-white/10 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" 
+                  className="w-full h-12 px-4 rounded-xl bg-background border border-border/50 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" 
                 />
               </div>
               <div className="space-y-2">
@@ -85,7 +87,7 @@ export default async function HackathonsPage() {
                   type="date"
                   name="endDate"
                   required
-                  className="w-full h-12 px-4 rounded-xl bg-black/50 border border-white/10 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" 
+                  className="w-full h-12 px-4 rounded-xl bg-background border border-border/50 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" 
                 />
               </div>
             </div>

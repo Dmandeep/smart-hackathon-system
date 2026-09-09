@@ -2,6 +2,7 @@ import { Code2, LayoutDashboard, Trophy, Users, ShieldCheck, Settings, LogOut } 
 import Link from "next/link";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { auth } from "@/auth";
+import { MobileNav } from "@/components/mobile-nav";
 
 export default async function DashboardLayout({
   children,
@@ -20,8 +21,8 @@ export default async function DashboardLayout({
         <div className="absolute top-[10%] left-[-10%] w-[40vw] h-[40vw] rounded-full bg-violet-600/10 blur-[120px] animate-pulse" style={{ animationDuration: '10s' }} />
       </div>
 
-      {/* Sidebar - Cinematic Minimal */}
-      <aside className="w-64 border-r border-border/50 bg-card/80 flex flex-col hidden md:flex z-10 shadow-xl backdrop-blur-md">
+      {/* Sidebar - Cinematic Minimal (Desktop Only) */}
+      <aside className="w-64 border-r border-border/50 bg-card/80 flex-col hidden md:flex z-10 shadow-xl backdrop-blur-md">
         <div className="h-20 flex items-center px-6 border-b border-border/50">
           <Link href="/" className="flex items-center gap-3 hover:scale-105 transition-transform">
             <div className="w-8 h-8 bg-primary/10 border border-primary/20 rounded-xl flex items-center justify-center">
@@ -67,12 +68,16 @@ export default async function DashboardLayout({
 
       {/* Main Content */}
       <main className="flex-1 flex flex-col min-h-screen overflow-hidden z-10 bg-transparent">
-        <header className="h-20 border-b border-border/50 bg-background/60 backdrop-blur-md flex items-center justify-between px-10 sticky top-0 shadow-sm">
-          <div className="text-sm font-semibold text-foreground/50 flex items-center gap-2">
-             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-             Organizer Portal
+        <header className="h-20 border-b border-border/50 bg-background/60 backdrop-blur-md flex items-center justify-between px-6 md:px-10 sticky top-0 shadow-sm z-50">
+          <div className="flex items-center gap-4">
+            <MobileNav />
+            <div className="text-sm font-semibold text-foreground/50 flex items-center gap-2">
+               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+               <span className="hidden sm:inline">Organizer Portal</span>
+               <span className="sm:hidden">Portal</span>
+            </div>
           </div>
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-4 md:gap-6">
             <ThemeToggle />
             <div className="flex items-center gap-3">
               <span className="text-sm font-semibold hidden md:block text-foreground">{userName}</span>
@@ -82,7 +87,7 @@ export default async function DashboardLayout({
             </div>
           </div>
         </header>
-        <div className="flex-1 overflow-auto p-6 md:p-10 relative">
+        <div className="flex-1 overflow-auto p-4 md:p-10 relative">
           {children}
         </div>
       </main>
