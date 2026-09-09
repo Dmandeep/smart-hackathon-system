@@ -17,14 +17,14 @@ export function AnimatedBackground() {
       
       {/* Calm Ambient Orb 1 - Top Left */}
       <motion.div
-        className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full blur-[100px] md:blur-[150px] opacity-60 dark:opacity-20 mix-blend-normal dark:mix-blend-screen bg-blue-100 dark:bg-blue-900"
+        className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full blur-[80px] md:blur-[120px] opacity-80 dark:opacity-40 mix-blend-normal dark:mix-blend-screen bg-blue-200 dark:bg-blue-800"
         animate={{
           x: [0, 50, 0],
           y: [0, 50, 0],
           scale: [1, 1.1, 1],
         }}
         transition={{
-          duration: 25,
+          duration: 20,
           repeat: Infinity,
           ease: "easeInOut",
         }}
@@ -32,14 +32,14 @@ export function AnimatedBackground() {
 
       {/* Calm Ambient Orb 2 - Bottom Right */}
       <motion.div
-        className="absolute bottom-[-10%] right-[-10%] w-[60vw] h-[60vw] rounded-full blur-[100px] md:blur-[150px] opacity-50 dark:opacity-20 mix-blend-normal dark:mix-blend-screen bg-teal-50 dark:bg-teal-900"
+        className="absolute bottom-[-10%] right-[-10%] w-[60vw] h-[60vw] rounded-full blur-[80px] md:blur-[120px] opacity-70 dark:opacity-40 mix-blend-normal dark:mix-blend-screen bg-teal-200 dark:bg-teal-800"
         animate={{
           x: [0, -70, 0],
           y: [0, -50, 0],
           scale: [1, 1.2, 1],
         }}
         transition={{
-          duration: 30,
+          duration: 25,
           repeat: Infinity,
           ease: "easeInOut",
           delay: 2,
@@ -48,23 +48,50 @@ export function AnimatedBackground() {
 
       {/* Calm Ambient Orb 3 - Center Flow */}
       <motion.div
-        className="absolute top-[20%] left-[20%] w-[70vw] h-[40vw] rounded-full blur-[120px] md:blur-[180px] opacity-40 dark:opacity-10 mix-blend-normal dark:mix-blend-screen bg-purple-100 dark:bg-purple-900"
+        className="absolute top-[20%] left-[20%] w-[70vw] h-[40vw] rounded-full blur-[100px] md:blur-[150px] opacity-60 dark:opacity-30 mix-blend-normal dark:mix-blend-screen bg-purple-200 dark:bg-purple-800"
         animate={{
           x: [0, 100, 0],
           y: [0, -100, 0],
           rotate: [0, 10, 0],
         }}
         transition={{
-          duration: 35,
+          duration: 30,
           repeat: Infinity,
           ease: "easeInOut",
           delay: 5,
         }}
       />
 
-      {/* Faint, elegant texture overlay to prevent banding and add premium feel */}
+      {/* Floating Ambient Particles */}
+      {[...Array(20)].map((_, i) => (
+        <motion.div
+          key={`particle-${i}`}
+          className="absolute w-2 h-2 rounded-full"
+          style={{
+            backgroundColor: i % 3 === 0 ? 'var(--primary)' : i % 3 === 1 ? '#3b82f6' : '#a855f7',
+          }}
+          initial={{
+            x: Math.random() * window.innerWidth,
+            y: Math.random() * window.innerHeight,
+            opacity: 0,
+            scale: Math.random() * 0.5 + 0.5,
+          }}
+          animate={{
+            y: [null, Math.random() * -300 - 100],
+            opacity: [0, 0.4, 0],
+          }}
+          transition={{
+            duration: Math.random() * 10 + 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: Math.random() * 5,
+          }}
+        />
+      ))}
+
+      {/* Faint, elegant texture overlay */}
       <div 
-        className="absolute inset-0 opacity-[0.015] dark:opacity-[0.03] mix-blend-overlay"
+        className="absolute inset-0 opacity-[0.02] dark:opacity-[0.04] mix-blend-overlay"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
           backgroundRepeat: 'repeat',
