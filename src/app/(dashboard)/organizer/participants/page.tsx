@@ -1,6 +1,7 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Code2, Search } from "lucide-react";
+import { PageTransition } from "@/components/animations/page-transition";
 
 export default function ParticipantsPage() {
   return (
