@@ -16,11 +16,6 @@ export default async function DashboardLayout({
   return (
     <div className="min-h-screen text-foreground flex relative font-sans bg-transparent">
       
-      {/* Background gradients for Dashboard */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none -z-50 opacity-20 mix-blend-multiply dark:mix-blend-screen">
-        <div className="absolute top-[10%] left-[-10%] w-[40vw] h-[40vw] rounded-full bg-violet-600/10 blur-[120px] animate-pulse" style={{ animationDuration: '10s' }} />
-      </div>
-
       {/* Sidebar - Cinematic Minimal (Desktop Only) */}
       <aside className="w-64 border-r border-border/50 bg-card/80 flex-col hidden md:flex z-10 shadow-xl backdrop-blur-md">
         <div className="h-20 flex items-center px-6 border-b border-border/50">

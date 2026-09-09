@@ -38,12 +38,6 @@ export default function RootLayout({
         >
           <CustomCursor />
           <AnimatedBackground />
-          
-          {/* Cinematic Aurora Background */}
-          <div className="fixed inset-0 overflow-hidden pointer-events-none -z-50 opacity-30 mix-blend-screen">
-             <div className="absolute top-[-20%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-violet-600/20 blur-[120px] animate-pulse" style={{ animationDuration: '8s' }} />
-             <div className="absolute bottom-[-20%] right-[-10%] w-[60vw] h-[60vw] rounded-full bg-cyan-500/10 blur-[140px] animate-pulse" style={{ animationDuration: '12s' }} />
-          </div>
 
           <div className="relative z-0">
             {children}
