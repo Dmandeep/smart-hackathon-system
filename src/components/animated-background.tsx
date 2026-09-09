@@ -15,6 +15,26 @@ export function AnimatedBackground() {
   return (
     <div className="fixed inset-0 pointer-events-none -z-40 overflow-hidden bg-background transition-colors duration-700">
       
+      {/* Infinite Panning Elegant Grid */}
+      <motion.div 
+        className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05]"
+        style={{
+          backgroundImage: `linear-gradient(to right, var(--foreground) 1px, transparent 1px), linear-gradient(to bottom, var(--foreground) 1px, transparent 1px)`,
+          backgroundSize: '40px 40px',
+          maskImage: 'radial-gradient(circle at center, black 30%, transparent 80%)',
+          WebkitMaskImage: 'radial-gradient(circle at center, black 30%, transparent 80%)',
+        }}
+        animate={{
+          x: [0, 40],
+          y: [0, 40],
+        }}
+        transition={{
+          repeat: Infinity,
+          duration: 4,
+          ease: "linear"
+        }}
+      />
+
       {/* Calm Ambient Orb 1 - Top Left */}
       <motion.div
         className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full blur-[80px] md:blur-[120px] opacity-80 dark:opacity-40 mix-blend-normal dark:mix-blend-screen bg-blue-200 dark:bg-blue-800"
@@ -62,12 +82,40 @@ export function AnimatedBackground() {
         }}
       />
 
-      {/* Floating Ambient Particles */}
-      {[...Array(20)].map((_, i) => (
+      {/* Giant Slow Drifting Rings */}
+      {[...Array(2)].map((_, i) => (
         <motion.div
-          key={`particle-${i}`}
-          className="absolute w-2 h-2 rounded-full"
+          key={`ring-${i}`}
+          className="absolute rounded-full border border-foreground/5 dark:border-foreground/10"
           style={{
+            width: i === 0 ? '60vw' : '80vw',
+            height: i === 0 ? '60vw' : '80vw',
+          }}
+          initial={{
+            x: i === 0 ? '-20vw' : '40vw',
+            y: i === 0 ? '10vh' : '-20vh',
+          }}
+          animate={{
+            x: i === 0 ? ['-20vw', '10vw', '-20vw'] : ['40vw', '10vw', '40vw'],
+            y: i === 0 ? ['10vh', '30vh', '10vh'] : ['-20vh', '0vh', '-20vh'],
+            rotate: [0, 180, 360],
+          }}
+          transition={{
+            duration: 60 + i * 20,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        />
+      ))}
+
+      {/* Floating Bokeh Particles */}
+      {[...Array(15)].map((_, i) => (
+        <motion.div
+          key={`bokeh-${i}`}
+          className="absolute rounded-full blur-md"
+          style={{
+            width: Math.random() * 40 + 20,
+            height: Math.random() * 40 + 20,
             backgroundColor: i % 3 === 0 ? 'var(--primary)' : i % 3 === 1 ? '#3b82f6' : '#a855f7',
           }}
           initial={{
@@ -77,8 +125,32 @@ export function AnimatedBackground() {
             scale: Math.random() * 0.5 + 0.5,
           }}
           animate={{
+            y: [null, Math.random() * -400 - 200],
+            x: [null, Math.random() * 200 - 100],
+            opacity: [0, 0.2, 0],
+          }}
+          transition={{
+            duration: Math.random() * 15 + 15,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: Math.random() * 5,
+          }}
+        />
+      ))}
+
+      {/* Sharp Micro Particles */}
+      {[...Array(20)].map((_, i) => (
+        <motion.div
+          key={`particle-${i}`}
+          className="absolute w-1 h-1 rounded-full bg-foreground/30 dark:bg-foreground/50"
+          initial={{
+            x: Math.random() * window.innerWidth,
+            y: Math.random() * window.innerHeight,
+            opacity: 0,
+          }}
+          animate={{
             y: [null, Math.random() * -300 - 100],
-            opacity: [0, 0.4, 0],
+            opacity: [0, 0.5, 0],
           }}
           transition={{
             duration: Math.random() * 10 + 10,
