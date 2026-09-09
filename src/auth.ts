@@ -1,11 +1,9 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { db } from "@/lib/db";
-import { users } from "@/lib/db/schema";
-import { eq } from "drizzle-orm";
 import { randomUUID } from "crypto";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+  secret: "hackverse-demo-secret-key-1234567890-do-not-use-in-real-prod",
   providers: [
     CredentialsProvider({
       name: "Demo Login",
@@ -16,21 +14,14 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       async authorize(credentials) {
         if (!credentials?.username) return null;
         
-        // Find or create user for the demo
+        // Return a mock user for the hackathon demo. 
+        // This prevents Vercel serverless functions from crashing when trying to write to a local SQLite file.
         const username = credentials.username as string;
-        let [user] = await db.select().from(users).where(eq(users.name, username));
-        
-        if (!user) {
-          const id = randomUUID();
-          await db.insert(users).values({
-            id,
-            name: username,
-            email: `${username}@demo.com`,
-          });
-          [user] = await db.select().from(users).where(eq(users.name, username));
-        }
-
-        return { id: user.id, name: user.name, email: user.email };
+        return { 
+          id: randomUUID(), 
+          name: username, 
+          email: `${username}@demo.com` 
+        };
       }
     })
   ],
